@@ -172,7 +172,7 @@ class XmppProxyPresenceProtocol(PresenceClientProtocol):
 
         if status != "offline":
             log.msg("_set_status: %s %s" % (entity.full(), status))
-            self.update_presence(entity, to_entity)
+            self.update_presence(entity, to_entity, show, { None: "\xe5\x8f\xbd\xe6\xad\xaa\xef\xbc\x81\xe5\x8f\xbd\xe6\xad\xaa\xef\xbc\x81\xe5\x8f\xbd\xe6\xad\xaa\xef\xbc\x81\xe5\x8f\xbd\xe6\xad\xaa\xef\xbc\x81\xe5\x8f\xbd\xe6\xad\xaa\xef\xbc\x81".decode("utf-8")} )
             if entity.userhost() != self.jid_proxy_to:
                 from_jid = entity.userhost().replace("@", "_at_").replace(".", "_") + "@"+self.component+"/" + self.resource
                 self.update_presence(JID(self.jid_proxy_to), JID(from_jid), show, statuses)
@@ -195,7 +195,7 @@ class XmppProxyPresenceProtocol(PresenceClientProtocol):
         if to_jid == self.jid_proxy_to:
             self.send(ComponentPresence(from_entity, to=entity, type=type))
         else:
-            self.send(ComponentPresence(self.jid, to=entity, type=type))
+            self.send(ComponentPresence(self.jid_act_as, to=entity, type=type))
 
     def subscribe(self, entity, from_entity):
         self._send_presence(entity, "subscribe", from_entity)
