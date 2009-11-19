@@ -1,0 +1,13 @@
+[general]
+name: XmppProxy
+admins: tsing@jianqing.org
+
+[xmpp]
+component: proxy.geowhy.org
+jid: jiwai@proxy.geowhy.org
+port: 5880
+pass: component_secret
+host: 127.0.0.1
+resource: bot
+priority: 25
+proxy_to: tsing@geowhy.org
