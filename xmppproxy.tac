@@ -18,16 +18,16 @@ from xmppproxy import config
 
 application = service.Application("XmppProxy")
 
-j = jid.internJID(config.CONF.get("xmpp", "jid"))
-proxy_to = jid.internJID(config.CONF.get("xmpp", "proxy_to"))
-resource = config.CONF.get("xmpp", "resource")
-component = config.CONF.get("xmpp", "component")
 xmppcomponent = Component(config.CONF.get("xmpp", "host"), config.CONF.getint("xmpp", "port"), config.CONF.get("xmpp", "component"), config.CONF.get("xmpp", "pass"))
 xmppcomponent.logTraffic = True
 
+component = config.CONF.get("xmpp", "component")
+jid_act_as = config.CONF.get("xmpp", "jid_act_as")
+jid_proxy_to = config.CONF.get("xmpp", "jid_proxy_to")
+
 protocols = [xmpp_protocol.XmppProxyMessageProtocol, xmpp_protocol.XmppProxyPresenceProtocol]
 for p in protocols:
-    handler = p(component, j, proxy_to, resource)
+    handler = p(component, jid_act_as, jid_proxy_to)
     handler.setHandlerParent(xmppcomponent)
 
 VersionHandler("XmppProxy", config.VERSION).setHandlerParent(xmppcomponent)
