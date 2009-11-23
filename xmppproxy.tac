@@ -19,7 +19,7 @@ from xmppproxy import config
 application = service.Application("XmppProxy")
 
 xmppcomponent = Component(config.CONF.get("xmpp", "host"), config.CONF.getint("xmpp", "port"), config.CONF.get("xmpp", "component"), config.CONF.get("xmpp", "pass"))
-xmppcomponent.logTraffic = True
+xmppcomponent.logTraffic = False
 
 component = config.CONF.get("xmpp", "component")
 jid_act_as = config.CONF.get("xmpp", "jid_act_as")
