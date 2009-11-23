@@ -92,7 +92,9 @@ class XmppProxyPresenceProtocol(PresenceClientProtocol, XmppProxyHandler):
         self.send(presence)
 
         if type == "subscribed":
-            self.probe(entity_from.full(), entity_to.userhost())
+            log.msg("Subscribed from %s" % entity_from.userhost())
+            self.probe(entity_from.full(), entity_to.full())
 
         if type == "available" and entity_from.userhost() != self.jid_proxy_to:
+            log.msg("Available from %s" % entity_from.full())
             self.probe(self.jid_proxy_to, new_jid_from)
